@@ -16,7 +16,7 @@ module Nestegg
             break
           end
         end
-        bt << "Caused by: #{cause}"
+        bt << "cause: #{cause.class.name}: #{cause}"
         bt.concat cause.backtrace
       end
       super bt

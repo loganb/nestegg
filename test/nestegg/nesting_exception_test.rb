@@ -24,14 +24,14 @@ class NestingExceptionTest < Test::Unit::TestCase
   test "includes cause in backtrace" do
     cause = create_cause(StandardError)
     with_exception TestNestingError.new("some message", cause) do |e|
-      assert_true e.backtrace.include?("Caused by: #{cause.to_s}")
+      assert_true e.backtrace.include?("cause: StandardError: #{cause.message}")
     end
   end
   
   test "includes cause and its backtrace in backtrace" do
     cause = create_cause(StandardError)
     with_exception TestNestingError.new("some message", cause) do |e|
-      assert_equal ["Caused by: #{cause.to_s}", "line_one", "line_two"], e.backtrace[-3..-1]
+      assert_equal ["cause: StandardError: #{cause.message}", "line_one", "line_two"], e.backtrace[-3..-1]
     end
   end
   
@@ -42,7 +42,7 @@ class NestingExceptionTest < Test::Unit::TestCase
       raise TestNestingError.new("msg", cause)
     rescue TestNestingError => e
       assert_match(/#{__FILE__}:\d+:in `test_.+'$/, e.backtrace[0])
-      assert_equal "Caused by: msg", e.backtrace[1]
+      assert_equal "cause: StandardError: msg", e.backtrace[1]
     end
   end
   

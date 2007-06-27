@@ -3,6 +3,7 @@ License.txt
 Manifest.txt
 README.txt
 Rakefile
+examples/nestegg_example.rb
 lib/nestegg.rb
 lib/nestegg/nesting_exception.rb
 lib/nestegg/version.rb

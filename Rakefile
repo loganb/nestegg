@@ -13,8 +13,8 @@ include FileUtils
 require File.join(File.dirname(__FILE__), 'lib', 'nestegg', 'version')
 
 AUTHOR = 'John D. Hume'  # can also be an array of Authors
-EMAIL = ""
-DESCRIPTION = "Nestegg provides a facility for nesting exceptions in Ruby"
+EMAIL = "duelin dot markers at gmail"
+DESCRIPTION = "Nestegg provides a facility for nesting exceptions in Ruby."
 GEM_NAME = 'nestegg' # what ppl will type to install your gem
 
 @config_file = "~/.rubyforge/user-config.yml"
