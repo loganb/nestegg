@@ -62,5 +62,6 @@ This code is free to use under the terms of the MIT license.
 
 h2. Contact
 
-Comments are welcome. Contact me via "my blog":http://elhumidor.blogspot.com/ or email.
+Comments are welcome. Contact me via "my blog":http://elhumidor.blogspot.com/ or on the "nestegg-users email list":http://rubyforge.org/mail/?group_id=3908.
 
+Nestegg was created by John D. Hume.
