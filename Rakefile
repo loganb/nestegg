@@ -133,5 +133,6 @@ Spec::Rake::SpecTask.new do |t|
   t.spec_files = FileList['spec/**/*_spec.rb']
 end
 
-desc "Default task is to run specs"
-task :default => :spec
+# desc "Default task is to run specs"
+# task :default => :spec
+Rake.application[:default].prerequisites.gsub! /test/, 'spec'
