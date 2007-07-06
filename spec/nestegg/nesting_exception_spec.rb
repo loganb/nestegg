@@ -1,16 +1,15 @@
-require File.expand_path(File.dirname(__FILE__) + '/../test_helper.rb')
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper.rb')
 
-class NestingExceptionTest < Test::Unit::TestCase
+describe Nestegg::NestingException do
+  
   class TestNestingError < StandardError
     include Nestegg::NestingException
   end
   
   def create_cause(klass = StandardError, message = "cause msg", backtrace = ["line_one", "line_two"])
-    begin
-      raise klass, message, backtrace
-    rescue klass => e
-      return e
-    end
+    e = klass.new(message)
+    e.set_backtrace backtrace
+    e
   end
   
   def with_exception exception
@@ -21,32 +20,33 @@ class NestingExceptionTest < Test::Unit::TestCase
     end
   end
   
-  test "includes cause in backtrace" do
+  it "includes cause in backtrace" do
     cause = create_cause(StandardError)
     with_exception TestNestingError.new("some message", cause) do |e|
-      assert_true e.backtrace.include?("cause: StandardError: #{cause.message}")
+      e.backtrace.should include("cause: StandardError: #{cause.message}")
     end
   end
   
-  test "includes cause and its backtrace in backtrace" do
+  it "includes cause's backtrace after cause in backtrace" do
     cause = create_cause(StandardError)
     with_exception TestNestingError.new("some message", cause) do |e|
-      assert_equal ["cause: StandardError: #{cause.message}", "line_one", "line_two"], e.backtrace[-3..-1]
+      e.backtrace[-3..-1].should == ["cause: StandardError: #{cause.message}", "line_one", "line_two"]
     end
   end
   
-  test "removes duplicated backtrace elements from nesting exception" do
+  it "removes duplicated backtrace elements from nesting exception" do
     cause_bt = caller.unshift "some_other_line"
     cause = create_cause(StandardError, "msg", cause_bt)
     begin
+      line = __LINE__ + 1
       raise TestNestingError.new("msg", cause)
     rescue TestNestingError => e
-      assert_match(/#{__FILE__}:\d+:in `test_.+'$/, e.backtrace[0])
-      assert_equal "cause: StandardError: msg", e.backtrace[1]
+      e.backtrace[0].should == "#{__FILE__}:#{line}"
+      e.backtrace[1].should == "cause: StandardError: msg"
     end
   end
   
-  test "cause defaults to current raised exception" do
+  it "defaults cause to current raised exception ($!)" do
     expected_cause = StandardError.new
     raised_error = nil
     begin
@@ -58,7 +58,7 @@ class NestingExceptionTest < Test::Unit::TestCase
     rescue TestNestingError => e
       raised_error = e
     end
-    assert_equal expected_cause, raised_error.cause
+    raised_error.cause.should == expected_cause
   end
   
 end

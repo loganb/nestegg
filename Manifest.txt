@@ -9,9 +9,9 @@ lib/nestegg/nesting_exception.rb
 lib/nestegg/version.rb
 scripts/txt2html
 setup.rb
-test/nestegg/nesting_exception_test.rb
-test/nestegg_test.rb
-test/test_helper.rb
+spec/nestegg/nesting_exception_spec.rb
+spec/spec.opts
+spec/spec_helper.rb
 website/index.html
 website/index.txt
 website/javascripts/rounded_corners_lite.inc.js

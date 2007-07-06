@@ -8,6 +8,13 @@ require 'rake/rdoctask'
 require 'rake/contrib/rubyforgepublisher'
 require 'fileutils'
 require 'hoe'
+begin
+  require 'spec/rake/spectask'
+rescue LoadError
+  puts 'To use rspec for testing you must install rspec gem:'
+  puts '$ sudo gem install rspec'
+  exit
+end
 
 include FileUtils
 require File.join(File.dirname(__FILE__), 'lib', 'nestegg', 'version')
@@ -66,7 +73,7 @@ hoe = Hoe.new(GEM_NAME, VERS) do |p|
   p.summary = DESCRIPTION
   p.url = HOMEPATH
   p.rubyforge_name = RUBYFORGE_PROJECT if RUBYFORGE_PROJECT
-  p.test_globs = ["test/**/*_test.rb"]
+  # p.test_globs = ["test/**/*_test.rb"]
   p.clean_globs |= CLEAN  #An array of file patterns to delete on clean.
   
   # == Optional
@@ -120,4 +127,11 @@ task :check_version do
   end
 end
 
+desc "Run the specs under spec"
+Spec::Rake::SpecTask.new do |t|
+  t.spec_opts = ['--options', "spec/spec.opts"]
+  t.spec_files = FileList['spec/**/*_spec.rb']
+end
 
+desc "Default task is to run specs"
+task :default => :spec
