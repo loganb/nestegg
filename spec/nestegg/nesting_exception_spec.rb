@@ -41,8 +41,7 @@ describe Nestegg::NestingException do
       line = __LINE__ + 1
       raise TestNestingError.new("msg", cause)
     rescue TestNestingError => e
-      e.backtrace[0].should == "#{__FILE__}:#{line}"
-      e.backtrace[1].should == "cause: StandardError: msg"
+      e.backtrace[0..1].should == ["#{__FILE__}:#{line}", "cause: StandardError: msg"]
     end
   end
   
