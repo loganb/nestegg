@@ -1,4 +1,3 @@
-README for nestegg
-==================
+= Nestegg
 
-For examples and more, see http://nestegg.rubyforge.org/.
+* http://nestegg.rubyforge.org
