@@ -1,13 +1,13 @@
 module Nestegg
   module NestingException
-    
+
     attr_reader :cause
-    
+
     def initialize message = nil, cause = $!
       @cause = cause
-		super(message)
+      super(message ||= cause.message)
     end
-    
+
     def set_backtrace bt
       if cause
         cause.backtrace.reverse.each do |line|
@@ -22,6 +22,6 @@ module Nestegg
       end
       super bt
     end
-    
+
   end
 end
