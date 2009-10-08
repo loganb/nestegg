@@ -1,3 +1,11 @@
+== 0.0.4 2009-10-07
+
+* Message defaults to cause's message
+
+== 0.0.3
+
+* Can pass message to Nesting Exception
+
 == 0.0.2 2007-06-26
 
 * Minor tweaks to backtrace formatting and addition of example code.

@@ -1,2 +1,6 @@
+#gem specs
+*.gemspec
+pkg
+
 #IDE related
 .idea
