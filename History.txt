@@ -1,3 +1,7 @@
+== 0.0.6 2009-12-11
+
+* Exceptions where the message is nil will no longer cause a NoMethodError
+
 == 0.0.4 2009-10-07
 
 * Message defaults to cause's message

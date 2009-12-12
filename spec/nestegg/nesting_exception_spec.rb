@@ -84,4 +84,12 @@ describe Nestegg::NestingException do
     end
   end
 
+  it "handles nil exception messages" do
+    begin
+      tne = TestNestingError.new(nil)
+      raise tne
+    rescue Exception => e
+      e.message.should == TestNestingError.to_s
+    end
+  end
 end

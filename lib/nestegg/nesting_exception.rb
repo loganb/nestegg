@@ -5,7 +5,7 @@ module Nestegg
 
     def initialize message = nil, cause = $!
       @cause = cause
-      super(message ||= cause.message)
+      super(message || cause && cause.message)
     end
 
     def set_backtrace bt
