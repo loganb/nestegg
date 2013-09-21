@@ -9,7 +9,7 @@ begin
     gemspec.authors = ["John D. Hume", "Logan Bowers", "Matt Scilipoti"]
   end
 rescue LoadError
-  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+  puts "Jeweler not available. Install it with: gem install jeweler"
   return
 end
 
